@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package packet;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/reiot777/go-grpc-example/packet;packet";
+
+service PingService {
+  rpc Ping (google.protobuf.Empty) returns (PingResponse);
+}
+
+service AccountService {
+  rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse);
+  rpc GetAccount (GetAccountRequest) returns (GetAccountResponse);
+  rpc ProduceAmount (ProduceAmountRequest) returns (ProduceAmountResponse);
+  rpc ConsumeAmount (ConsumeAmountRequest) returns (ConsumeAmountResponse);
+}
+
+service PointService {
+  rpc ProducePoint (ProducePointRequest) returns (ProducePointResponse);
+  rpc ConsumePoint (ConsumePointRequest) returns (ConsumePointResponse);
+  rpc GetPoint (GetPointRequest) returns (GetPointResponse);
+}
+
+message PingResponse {
+  int64 ts = 1;
+}
+
+message CreateAccountRequest {
+  string email = 1;
+}
+
+message CreateAccountResponse {
+  Account data = 1;
+}
+
+message GetAccountRequest {
+  string owner = 1;
+}
+
+message GetAccountResponse {
+  Account data = 1;
+}
+
+message ProduceAmountRequest {
+  string owner = 1;
+  int64 amount = 2;
+}
+
+message ProduceAmountResponse {
+  int64 amount = 1;
+}
+
+message ConsumeAmountRequest {
+  string owner = 1;
+  int64 amount = 2;
+}
+
+message ConsumeAmountResponse {
+  int64 amount = 1;
+}
+
+message GetPointRequest {
+  string owner = 1;
+}
+
+message GetPointResponse {
+  int64 point = 1;
+}
+
+message ProducePointRequest {
+  string owner = 1;
+  int64 point = 2;
+}
+
+message ProducePointResponse {
+  int64 point  = 1;
+}
+
+message ConsumePointRequest {
+  string owner = 1;
+  int64 point = 2;
+}
+
+message ConsumePointResponse {
+  int64 point  = 1;
+}
+
+message Account {
+  string id = 1;
+  string owner = 2;
+  string email = 3;
+  int64 amount = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
